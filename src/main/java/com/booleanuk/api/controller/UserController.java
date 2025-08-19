@@ -2,6 +2,7 @@ package com.booleanuk.api.controller;
 
 import com.booleanuk.api.model.User;
 import com.booleanuk.api.repository.UserRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,12 +26,12 @@ public class UserController {
 
 
     @PostMapping
-    public ResponseEntity<User> PostUser(@RequestBody User user) {
+    public ResponseEntity<User> PostUser(@Valid @RequestBody User user) {
         return new ResponseEntity<>(this.repository.save(user), HttpStatus.CREATED);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<User> create(@PathVariable int id, @RequestBody User user) {
+    public ResponseEntity<User> create(@PathVariable int id, @Valid @RequestBody User user) {
         User userToUpdate = this.repository.findById(id).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "not found")
         );

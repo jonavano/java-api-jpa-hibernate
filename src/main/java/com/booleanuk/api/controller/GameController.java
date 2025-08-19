@@ -4,6 +4,7 @@ import com.booleanuk.api.model.Game;
 import com.booleanuk.api.model.User;
 import com.booleanuk.api.repository.GameRepository;
 import com.booleanuk.api.repository.UserRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,12 +28,12 @@ public class GameController {
 
 
     @PostMapping
-    public ResponseEntity<Game> PostUser(@RequestBody Game game) {
+    public ResponseEntity<Game> PostUser(@Valid @RequestBody Game game) {
         return new ResponseEntity<>(this.repository.save(game), HttpStatus.CREATED);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Game> create(@PathVariable int id, @RequestBody Game game) {
+    public ResponseEntity<Game> create(@PathVariable int id, @Valid @RequestBody Game game) {
         Game gameToUpdate = this.repository.findById(id).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "not found")
         );
@@ -46,7 +47,7 @@ public class GameController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Game> delete(@PathVariable int id) {
+    public ResponseEntity<Game> delete( @PathVariable int id) {
         Game gameToDelete = this.repository.findById(id).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found")
         );
