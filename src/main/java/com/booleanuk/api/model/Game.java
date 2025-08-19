@@ -2,35 +2,36 @@ package com.booleanuk.api.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
-@Table(name = "users")
+@Table(name = "games")
 @Data
 //@Getter
 //@Setter
 @NoArgsConstructor
-public class User {
+public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(nullable = false)
-    private String email;
+    private String title;
 
     @Column(nullable = false)
-    private String firstName;
+    private String genre;
 
     @Column(nullable = false)
-    private String lastName;
+    private String publisher;
 
     @Column(nullable = false)
-    private String userName;
+    private String developer;
 
     @Column(nullable = false)
-    private String phone;
+    private int releaseYear;
+
+    @Column(nullable = false)
+    private boolean isEarlyAccess;
 
 
 }
